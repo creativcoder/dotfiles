@@ -1,3 +1,13 @@
+set nocompatible																	" be iMproved, required (Vundle)
+filetype off																		" required (Vundle)
+
+set	rtp+=~/.vim/bundle/Vundle.vim
+call vundle#begin()
+
+Plugin 'VundleVim/Vundle.vim' 
+
+call vundle#end()
+
 python from powerline.vim import setup as powerline_setup
 python powerline_setup()
 python del powerline_setup
