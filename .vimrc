@@ -1,25 +1,25 @@
-set nocompatible																	" be iMproved, required (Vundle)
-filetype off																		" required (Vundle)
-
-set	rtp+=~/.vim/bundle/Vundle.vim
-call vundle#begin()
-
-Plugin 'VundleVim/Vundle.vim' 
-
-call vundle#end()
-
-python from powerline.vim import setup as powerline_setup
-python powerline_setup()
-python del powerline_setup
-
+call pathogen#infect()
+syntax on
+filetype plugin indent on
+set mouse=a
 set tabstop=4
+set hidden
+let g:racer_cmd = "/home/creativcoder/git/racer/target/release/racer"
+let $RUST_SRC_PATH="/home/creativcoder/git/rust-lang/rust/src"
 
-set laststatus=2
+autocmd vimenter * NERDTree
+autocmd WinEnter * call s:CloseIfOnlyNerdTreeLeft()
 
-set rtp+=$HOME/.local/lib/python2.7/site-packages/powerline/bindings/vim/
+" User def functions
 
-" Always show statusline
-set laststatus=2
-
-" Use 256 colours (Use this setting only if your terminal supports 256 colours)
-set t_Co=256
+" Close all open buffers on entering a window if the only
+" buffer that's left is the NERDTree buffer
+function! s:CloseIfOnlyNerdTreeLeft()
+  if exists("t:NERDTreeBufName")
+    if bufwinnr(t:NERDTreeBufName) != -1
+      if winnr("$") == 1
+        q
+      endif
+    endif
+  endif
+endfunction
